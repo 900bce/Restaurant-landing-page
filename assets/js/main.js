@@ -23,21 +23,32 @@ const navShrink = () => {
 
 window.addEventListener('scroll', navShrink);
 
+
 // Responsive Navbar Menu
-navMenuButton.addEventListener('click', () => {
-  if (navMenuButton.checked === true) {
-    navMenuList.style.display = 'flex';
-  } else {
-    navMenuList.style.display = 'none';
+const showNavbarMenu = () => {
+  navMenuList.style.display = 'flex';
+}
+
+const hideNavbarMenu = () => {
+  navMenuList.style.display = 'none';
+}
+
+navMenuButton.addEventListener('change', e => {
+  if (e.target.checked) {
+    showNavbarMenu();
+  } else if (!e.target.checked) {
+    hideNavbarMenu();
   }
 });
 
-for (let i = 0; i < navLinks.length; i++) {
-  navLinks[i].addEventListener('click', () => {
-    navMenuList.style.display = 'none';
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 900) {
+    showNavbarMenu();
+  } else {
+    hideNavbarMenu();
     navMenuButton.checked = false;
-  })
-}
+  }
+});
 
 
 // Menu switch
